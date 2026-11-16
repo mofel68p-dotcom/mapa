@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CACHITOFEST – Mapa del recinto</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0A6670;--aqua:#86DDD5;--red:#C8102E;--ink:#07474E;--y:#FFD21F;box-sizing:border-box}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#07474E;display:grid;place-items:center;overflow:hidden}
+#st{container-type:size;position:relative;width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;overflow:hidden;background:linear-gradient(160deg,#B6F0EA,#86DDD5 60%,#6CCFC8);font-family:'Barlow Condensed','Arial Narrow',sans-serif;color:#fff}
+.cl{position:absolute;background:#fff;opacity:.55;border-radius:99cqw;animation:fl 9s ease-in-out infinite alternate}
+.cl::after{content:'';position:absolute;left:18%;top:-45%;width:50%;height:140%;background:#fff;border-radius:50%}
+@keyframes fl{to{translate:3cqw 0}}
+#pn{position:absolute;left:0;top:0;bottom:0;width:47%;padding:2.2cqw 0 0 3.4cqw;background:repeating-linear-gradient(0deg,#0A6670 0 .9cqw,#0D7882 .9cqw 1.5cqw);clip-path:polygon(0 0,100% 0,88% 100%,0 100%);z-index:2}
+h1{font:400 4.6cqw/1 Anton,Impact,sans-serif;letter-spacing:.1cqw;text-transform:uppercase}
+.sub{font-weight:700;font-size:1.3cqw;color:var(--y);margin:.4cqw 0 1.1cqw;letter-spacing:.08cqw}
+.it{display:flex;align-items:center;gap:1.2cqw;height:3.72cqw;cursor:pointer}
+.bd{position:relative;width:3.1cqw;height:3.1cqw;border:.24cqw solid #fff;border-radius:.8cqw;display:grid;place-items:center;font-size:1.6cqw;background:rgba(255,255,255,.08);flex:none}
+.bd b{position:absolute;right:-.9cqw;top:-.9cqw;width:1.5cqw;height:1.5cqw;border-radius:50%;background:var(--red);font:400 .95cqw/1.5cqw Anton,sans-serif;text-align:center}
+.it strong{display:block;font-size:1.4cqw;line-height:1.05;text-transform:uppercase;letter-spacing:.05cqw}
+.it span{font-size:1cqw;opacity:.85}
+.it:hover .bd,.it.on .bd{background:var(--red);transform:scale(1.08)}
+#mp{position:absolute;left:40cqw;top:5cqh;width:58cqw;height:90cqh;z-index:1}
+.z{transition:filter .2s}
+svg.h1 .z1,svg.h2 .z2,svg.h3 .z3,svg.h4 .z4,svg.h5 .z5,svg.h6 .z6,svg.h7 .z7,svg.h8 .z8,svg.h9 .z9,svg.h10 .z10,svg.h11 .z11,svg.h12 .z12{filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 10px #FFD21F)}
+.mk{cursor:pointer}.mk circle{fill:var(--red);stroke:#fff;stroke-width:3;transform-box:fill-box;transform-origin:center;animation:pp 2.2s ease-in-out infinite}
+.mk text{font:400 17px Anton,Impact,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
+@keyframes pp{50%{transform:scale(1.14)}}
+.b{animation:bb 1.1s ease-in-out infinite alternate}
+@keyframes bb{to{transform:translateY(-2.5px)}}
+.sp{transform-origin:0 0;animation:rt 7s linear infinite}@keyframes rt{to{transform:rotate(360deg)}}
+.tw{animation:tw 1.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes tw{to{transform:scale(1.3);opacity:.7}}
+.sn{position:absolute;top:-3cqw;border-radius:50%;background:#fff;opacity:.9;animation:fa linear infinite;z-index:3;pointer-events:none}
+@keyframes fa{to{transform:translate(var(--dx),64cqw)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div id="st">
+<div class="cl" style="left:50%;top:6%;width:9cqw;height:2.6cqw"></div>
+<div class="cl" style="left:86%;top:62%;width:11cqw;height:3cqw;animation-delay:-3s"></div>
+<div class="cl" style="left:42%;top:84%;width:8cqw;height:2.3cqw;animation-delay:-6s"></div>
+<svg id="mp" viewBox="-450 -90 920 600" preserveAspectRatio="xMidYMid meet"></svg>
+<div id="pn"><h1>Zonas</h1><div class="sub">CACHITOFEST · NAVIDAD CÓRDOBA</div><div id="lg"></div></div>
+</div>
+<script>
+const S=5.6,P=(u,v,z=0)=>[(u-v)*.866*S,(u+v)*.5*S-z*S];
+const pt=a=>a.map(p=>P(...p).map(n=>n.toFixed(1)).join(',')).join(' ');
+const pl=(a,f,x='')=>`<polygon points="${pt(a)}" fill="${f}" ${x}/>`;
+const box=(u,v,w,d,h,c,z=0)=>{const t=z+h;return pl([[u,v+d,z],[u+w,v+d,z],[u+w,v+d,t],[u,v+d,t]],c[1])+pl([[u+w,v,z],[u+w,v+d,z],[u+w,v+d,t],[u+w,v,t]],c[2])+pl([[u,v,t],[u+w,v,t],[u+w,v+d,t],[u,v+d,t]],c[0])};
+const WH=['#fff','#E3F6F5','#C5E8E6'],RD=['#E8344E','#C8102E','#9E0C24'],TL=['#8EE0D8','#17A3AD','#0F8A94'],DK=['#4DB8B0','#0A6670','#07474E'],YL=['#FFE680','#FFD21F','#E0B300'],GR=['#47B05A','#2E9448','#1F7A3A'];
+const F=[[0,8],[92,0],[100,22],[94,36],[84,48],[72,58],[66,68],[64,100],[14,96],[0,50]];
+const items=[];const add=(k,z,s)=>items.push([k,z,s]);
+const bx=(u,v,w,d,h,c,z,zo=0)=>add(u+v+(w+d)/2+zo,z,`<g class="z z${z}">${box(u,v,w,d,h,c,zo)}</g>`);
+const man=(u,v,c,z)=>{const[x,y]=P(u,v);add(u+v,z,`<g class="z z${z}" transform="translate(${x} ${y})"><ellipse rx="5" ry="2" fill="#0A66702a"/><g class="b" style="animation-delay:-${(u*v%9)/10}s"><rect x="-2.7" y="-14" width="5.4" height="10" rx="2.5" fill="${c}"/><circle cy="-17" r="3.2" fill="#fff"/><rect x="-3" y="-15" width="6" height="2" fill="#C8102E"/></g></g>`)};
+const tree=(x,y,s,o)=>{let g=`<rect x="${-4*s}" y="${-6*s}" width="${8*s}" height="${8*s}" fill="#6B3F1D"/>`;for(let i=0;i<(o?5:3);i++){const w=(o?80-i*14:40-i*8)*s,h=(o?22:14)*s,b=-(i*h*.8+4*s),t=b-h-12*s;g+=`<polygon points="${-w/2},${b} ${w/2},${b} 0,${t}" fill="${i%2?GR[0]:GR[1]}"/><polygon points="${-w/2},${b} ${-w/2+w*.18},${b-h*.16} ${-w*.1},${b} ${w*.1},${b-h*.16} ${w*.28},${b} ${w/2},${b} ${w*.46},${b+.01}" fill="#fff" opacity=".9"/>`}return g};
+// suelo
+let out=`<defs><pattern id="sp" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="16" height="16" fill="#F7FFFE"/><rect width="8" height="16" fill="#E9FAF8"/></pattern><clipPath id="cp"><polygon points="${pt(F)}"/></clipPath></defs>`;
+for(let i=0;i<F.length;i++){const a=F[i],b=F[(i+1)%F.length];out+=pl([[...a,0],[...b,0],[...b,-4],[...a,-4]],i%2?'#BFE6E3':'#D5F1EF')}
+out+=pl(F,'url(#sp)','stroke="#fff" stroke-width="3" stroke-linejoin="round"');
+// 1 escenario
+bx(4,12,18,14,5,DK,1);bx(4,12,1.6,14,15,RD,1);bx(4,10,2.2,2.2,17,WH,1);bx(4,26,2.2,2.2,17,WH,1);
+bx(8,15,10,8,.6,YL,1,5);add(20,1,`<g class="z z1">${tree(...P(15,22,5),.55)}</g>`);
+// 2 pista hielo
+out+=pl([[27,33],[63,33],[63,59],[27,59]],'#fff')+pl([[28.2,34.2],[61.8,34.2],[61.8,57.8],[28.2,57.8]],'#C8F1F5')+`<polyline class="z z2" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" points="${pt([[32,52],[40,40],[50,50],[57,38]])}"/>`;
+[[27,33,36,1],[27,58,36,1],[27,33,1,26],[62,33,1,26]].forEach(r=>bx(r[0],r[1],r[2],r[3],1.3,WH,2));
+[[34,42,'#C8102E'],[44,50,'#FFD21F'],[52,40,'#17A3AD'],[40,54,'#C8102E'],[56,52,'#fff'],[46,38,'#0A6670']].forEach(m=>man(m[0],m[1],m[2],2));
+// 3 coches de choque
+out+=pl([[66,6],[86,6],[86,18],[66,18]],'#0F8A94');bx(66,6,20,1,1.5,WH,3);bx(66,17,20,1,1.5,WH,3);bx(66,6,1,12,1.5,WH,3);bx(85,6,1,12,1.5,WH,3);
+[[69,8,RD],[75,12,YL],[80,8,WH],[71,14,TL],[82,13,RD]].forEach(c=>bx(c[0],c[1],3,2.2,1.6,c[2],3));
+// 4 hockey
+out+=pl([[28,64],[54,64],[54,78],[28,78]],'#E4F9FB')+`<polyline class="z z4" fill="none" stroke="#C8102E" stroke-width="2" points="${pt([[41,64],[41,78]])}"/>`;
+bx(28,64,26,1,1.6,WH,4);bx(28,77,26,1,1.6,WH,4);bx(28,64,1,14,1.6,WH,4);bx(53,64,1,14,1.6,WH,4);bx(29,69.5,1.6,3,1.8,RD,4);bx(51.4,69.5,1.6,3,1.8,RD,4);
+[[34,68,'#C8102E'],[38,73,'#C8102E'],[46,70,'#17A3AD'],[48,75,'#17A3AD']].forEach(m=>man(m[0],m[1],m[2],4));
+// 5 tobogán
+out+=pl([[75,24],[75,30],[95,30],[95,24]],'#fff','opacity=".0"');
+add(60,5,`<g class="z z5">${pl([[75,25,14],[75,30,14],[95,30,0],[95,25,0]],'#BDF0F3')}${pl([[75,30,14],[95,30,0],[95,30,1.8],[75,30,15.8]],'#fff')}</g>`);
+bx(70,24,6,6,15,WH,5);bx(69.4,23.4,7.2,7.2,1.2,RD,5,15);bx(86,26,3.2,2,1,RD,5,3.2);bx(91.5,26.4,3,1.8,.9,YL,5,.7);
+// 6 baños
+[38,44,50].forEach(v=>bx(3,v,5,4.5,5,[WH[0],'#fff','#C5E8E6'],6)||0);[38,44,50].forEach(v=>bx(7.9,v+.9,.2,2.4,3.2,TL,6));
+// 7 comida
+[62,70,78].forEach((v,i)=>{bx(13,v,6,5,3.2,[RD[0],'#fff','#E3F6F5'],7);bx(13,v+.3,6,4.4,.5,i==1?YL:RD,7,3.2)});
+// 8 entrada
+bx(27,96.6,1.6,1.6,9,WH,8);bx(39,97.2,1.6,1.6,9,WH,8);bx(27,96.6,13.6,2.2,2.2,RD,8,9);bx(31.5,96.8,4.6,1.8,2,YL,8,11.2);
+add(0,8,`<g class="z z8">${pl([[32.4,95.5],[34.4,95.5],[34.4,91.5],[36.6,91.5],[33.4,87.5],[30.2,91.5],[32.4,91.5]],'#C8102E')}</g>`);
+// 9 árbol gigante
+const[tx,ty]=P(77,47);add(0,9,`<g class="z z9"><ellipse cx="${tx}" cy="${ty+4}" rx="46" ry="22" fill="#fff" stroke="#C8102E" stroke-width="4" stroke-dasharray="10 7"/></g>`);
+let tg=`<g class="z z9" transform="translate(${tx} ${ty}) scale(.72)">${tree(0,0,1.7,1)}`;
+for(let i=0;i<22;i++){const a=i*2.4,r=(i%5+1)*13,y=-20-(i*9%110);const w=(1-(-y-20)/150)*62;tg+=`<circle class="tw" style="animation-delay:-${(i%7)/5}s" cx="${Math.sin(a)*w*.8}" cy="${y}" r="${i%3?3.4:4.2}" fill="${['#C8102E','#FFD21F','#fff'][i%3]}"/>`}
+tg+=`<polygon class="tw" points="0,-228 8,-206 31,-206 12,-192 19,-170 0,-183 -19,-170 -12,-192 -31,-206 -8,-206" fill="#FFD21F" stroke="#F3A91A" stroke-width="2"/></g>`;
+add(77+47+3,9,tg);bx(82,48,3,3,2.4,RD,9);bx(70.5,49,2.6,2.6,1.8,TL,9);bx(74,52,2.2,2.2,1.4,YL,9);
+// 10 photocall
+bx(57,82,1.2,9,6.5,[YL[1],RD[2],RD[0]],10);bx(56.6,81.6,2,9.8,.9,YL,10,6.5);bx(59.4,84.5,2.4,2.4,1.6,WH,10);bx(59.8,88,2,2,1.2,TL,10);
+[[56,81],[56,93]].forEach(t=>{const[x,y]=P(...t);add(t[0]+t[1],10,`<g class="z z10" transform="translate(${x} ${y})">${tree(0,0,.8,0)}</g>`)});
+// 11 merch
+bx(40,6,9,6,3.6,[RD[0],'#fff','#E3F6F5'],11);bx(40,6.3,9,5.4,.5,YL,11,3.6);bx(41,13,1.5,1.5,1.7,YL,11);bx(44,13.4,1.5,1.5,1.7,TL,11);bx(47,13,1.5,1.5,1.7,RD,11);
+// 12 juegos
+[31,38,45].forEach((v,i)=>{bx(11,v,6,5,3.6,WH,12);bx(11,v+.3,6,4.4,.5,[RD,YL,TL][i],12,3.6)});bx(18.5,32,2,2,1.6,RD,12);bx(18.5,40,2,2,1.6,YL,12);
+{const[x,y]=P(19,54);let g='';const c=['#C8102E','#FFD21F','#fff','#17A3AD'];for(let i=0;i<8;i++){const a=i*Math.PI/4,b=a+Math.PI/4,q=(t,k)=>(15*Math[k](t)).toFixed(1);g+=`<path d="M0 0L${q(a,'cos')} ${q(a,'sin')}A15 15 0 0 1 ${q(b,'cos')} ${q(b,'sin')}Z" fill="${c[i%4]}"/>`}
+add(73,12,`<g class="z z12" transform="translate(${x} ${y})"><rect x="-2" y="-18" width="4" height="18" fill="#0A6670"/><g transform="translate(0 -32)"><g class="sp">${g}</g><circle r="15" fill="none" stroke="#fff" stroke-width="2.5"/><polygon points="0,-11 -3.5,-19 3.5,-19" fill="#0A6670"/></g></g>`)}
+// adornos
+[[24,26],[66,24],[60,62],[8,32],[20,90],[88,40],[61,92],[40,90]].forEach(t=>{const[x,y]=P(...t);add(t[0]+t[1],0,`<g transform="translate(${x} ${y})">${tree(0,0,.7,0)}</g>`)});
+items.sort((a,b)=>a[0]-b[0]).forEach(i=>out+=i[2]);
+// marcadores
+const mk={1:[10,16,8],2:[45,46,3],3:[76,12,3],4:[41,71,3],5:[74,28,18],6:[5.5,46,7],7:[16,70,6],8:[33,97,13],9:[77,47,33],10:[57.6,86,8],11:[44.5,9,7],12:[14,38,8]};
+for(const k in mk){const[u,v,h]=mk[k],[x,y]=P(u,v,h+3);out+=`<g class="mk" data-z="${k}" transform="translate(${x} ${y-14})"><circle r="16"/><text y="6">${k}</text></g>`}
+const mp=document.getElementById('mp');mp.innerHTML=out;
+// leyenda
+const L=[['🎤','Escenario','Stage'],['⛸️','Pista de hielo · patinaje','Ice skating rink'],['🚗','Coches de choque','Bumper cars'],['🏒','Pista de hockey','Hockey rink'],['🛷','Tobogán de hielo con trineo','Ice slide & sled'],['🚻','Baños','Restrooms'],['🍔','Zonas de comida','Food area'],['🚪','Entrada','Entrance'],['🎄','Árbol de Navidad gigante','Photo spot · Giant tree'],['📸','Photocall navideño','Christmas photocall'],['🛍️','Puesto de merch','Merch stand'],['🎡','Juegos para ganar premios','Prize games']];
+document.getElementById('lg').innerHTML=L.map((l,i)=>`<div class="it" data-z="${i+1}"><div class="bd">${l[0]}<b>${i+1}</b></div><div><strong>${l[1]}</strong><span>${l[2]}</span></div></div>`).join('');
+const hl=n=>{mp.setAttribute('class',n?'h'+n:'');document.querySelectorAll('.it').forEach(e=>e.classList.toggle('on',e.dataset.z==n))};
+document.querySelectorAll('.it,.mk').forEach(e=>{e.onmouseenter=()=>hl(e.dataset.z);e.onmouseleave=()=>hl(0);e.onclick=()=>hl(e.dataset.z)});
+// nieve
+const st=document.getElementById('st');for(let i=0;i<55;i++){const d=document.createElement('i'),s=.35+Math.random()*.7;d.className='sn';d.style.cssText=`left:${Math.random()*100}%;width:${s}cqw;height:${s}cqw;animation-duration:${7+Math.random()*8}s;animation-delay:-${Math.random()*14}s;--dx:${(Math.random()*8-4).toFixed(1)}cqw`;st.appendChild(d)}
+</script></body></html>
